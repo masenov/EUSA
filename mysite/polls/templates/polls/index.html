@@ -1,0 +1,19 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+{% if latest_poll_list %}
+    <ul>
+    {% for opinion in latest_poll_list %}
+        <li>{{ opinion.why_thank }} &nbsp &nbsp department:{{opinion.department}} &nbsp &nbsp receiver:{{opinion.receiver}} 
+        	{% if opinion.anonymous %}
+        		anonymous
+        	{% else %}
+        		{{opinion.name}}
+        	{% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
