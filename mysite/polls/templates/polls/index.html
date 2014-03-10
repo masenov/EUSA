@@ -1,17 +1,18 @@
 {% load staticfiles %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
-
+<h1>Thank you cards</h1>
+<center><button type="button" class="button"><a href="/polls/write" STYLE="text-decoration: none">Leave a thank you card</button></center>
 {% if latest_poll_list %}
     <ul>
     {% for opinion in latest_poll_list %}
-        <li>{{ opinion.why_thank }} &nbsp &nbsp department:{{opinion.department}} &nbsp &nbsp receiver:{{opinion.receiver}} 
+        <div class="based-on-text">Department:{{opinion.department}} <br> Dear {{opinion.receiver}}, <br> {{ opinion.why_thank }}   <br>   
         	{% if opinion.anonymous %}
-        		anonymous
+        		Anonymous
         	{% else %}
         		{{opinion.name}}
         	{% endif %}
-        </li>
+        </div>
     {% endfor %}
     </ul>
 {% else %}

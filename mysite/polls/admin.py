@@ -8,7 +8,7 @@ class PollAdmin(admin.ModelAdmin):
         ('Accept feedback',	 {'fields': ['approved']}),
     ]
     list_display = ('name', 'pub_date', 'approved')
-
+    list_filter = ['pub_date']
 admin.site.register(Opinion, PollAdmin)
 
 # Register your models here.

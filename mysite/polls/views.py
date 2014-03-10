@@ -2,8 +2,14 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.http import HttpResponse
+from django.forms import ModelForm
+from django import forms
+from django.core.context_processors import csrf
+from django.shortcuts import render_to_response
+from polls.models import Opinion, OpinionForm
+from django.core.mail import send_mail
 
-from polls.models import Opinion
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -12,3 +18,19 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published polls."""
         return Opinion.objects.filter(approved=True)
+
+def create(request):
+	if request.POST:
+		form = OpinionForm(request.POST)
+		if form.is_valid():
+			form.save()
+			
+			return HttpResponseRedirect('/polls')
+	else:
+			form = OpinionForm()
+	args = {}
+	args.update(csrf(request))
+	args['form'] = form
+	return render(request, 'polls/write.html', args)
+
+
