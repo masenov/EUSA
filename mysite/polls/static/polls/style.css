@@ -10,7 +10,10 @@ div {
  .based-on-text{
    display: inline-block;
  }
-
+ul {
+	display: inline-block;
+    text-align: right;
+}
 h1 {
 	color:#383838;
 	text-align: center

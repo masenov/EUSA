@@ -25,12 +25,16 @@ def create(request):
 		if form.is_valid():
 			form.save()
 			
-			return HttpResponseRedirect('/polls')
+			return HttpResponseRedirect('/polls/thankyou')
 	else:
 			form = OpinionForm()
 	args = {}
 	args.update(csrf(request))
 	args['form'] = form
 	return render(request, 'polls/write.html', args)
+
+def thankyou(request):
+	template_name = 'polls/thankyou.html'
+	return render(request, 'polls/thankyou.html')
 
 
