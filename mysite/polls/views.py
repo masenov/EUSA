@@ -8,8 +8,7 @@ from django import forms
 from django.core.context_processors import csrf
 from django.shortcuts import render_to_response
 from polls.models import Opinion, OpinionForm
-from django.core.mail import send_mail
-
+from django.core.mail import send_mail, mail_admins
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
@@ -17,15 +16,15 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five published polls."""
-        return Opinion.objects.filter(approved=True)
+        return Opinion.objects.filter(moderated='Y')
 
 def create(request):
 	if request.POST:
 		form = OpinionForm(request.POST)
 		if form.is_valid():
 			form.save()
-			
-			return HttpResponseRedirect('/polls/thankyou')
+			send_mail('test','test email', '',[''], fail_silently=True) #3rd argument is mail sender, 4th is mail receiver; can use mail_admins in the final version
+			return HttpResponseRedirect('/polls/thankyou')													
 	else:
 			form = OpinionForm()
 	args = {}

@@ -6,7 +6,7 @@
 <br>
 {% if latest_poll_list %}
     {% for opinion in latest_poll_list %}
-        <div class="based-on-text">Department:{{opinion.department}} <br> Dear <b>{{opinion.receiver}} <br> {{ opinion.why_thank }}</b>   <br>   
+        <div class="based-on-text">Department:{{opinion.department}} <br> Dear <b>{{opinion.receiver}} <br> {{ opinion.feedback }}</b>   <br>   
         	{% if opinion.anonymous %}
         		Anonymous
         	{% else %}

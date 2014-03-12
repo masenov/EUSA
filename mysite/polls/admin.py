@@ -3,11 +3,11 @@ from polls.models import Opinion
 
 class PollAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['name', 'receiver', 'department', 'why_thank', 'anonymous']}),
+        (None,               {'fields': ['name', 'receiver', 'department', 'feedback', 'anonymous']}),
         ('Date information', {'fields': ['pub_date'], 'classes': ['collapse']}),
-        ('Accept feedback',	 {'fields': ['approved']}),
+        ('Accept feedback',	 {'fields': ['moderated']}),
     ]
-    list_display = ('name', 'pub_date', 'approved')
+    list_display = ('name', 'pub_date', 'moderated')
     list_filter = ['pub_date']
 admin.site.register(Opinion, PollAdmin)
 
