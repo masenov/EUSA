@@ -8,7 +8,8 @@ class PollAdmin(admin.ModelAdmin):
         ('Accept feedback',	 {'fields': ['moderated']}),
     ]
     list_display = ('name', 'pub_date', 'moderated')
-    list_filter = ['pub_date']
+    list_filter = ['pub_date', 'moderated']
+
 admin.site.register(Opinion, PollAdmin)
 
 # Register your models here.

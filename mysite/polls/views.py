@@ -23,7 +23,7 @@ def create(request):
 		form = OpinionForm(request.POST)
 		if form.is_valid():
 			form.save()
-			send_mail('test','test email', '',[''], fail_silently=True) #3rd argument is mail sender, 4th is mail receiver; can use mail_admins in the final version
+			mail_admins('New feedback received!', "Dear Admin, \nThe user \""+request.POST.get("name","") + "\" posted the feedback \"" + request.POST.get("feedback","") + "\" for \"" + request.POST.get("receiver","")+"\", from \""+request.POST.get("department","")+"\". Login to http://127.0.0.1:8000/admin/polls/opinion/ to approve the feedback.", fail_silently=False) #3rd argument is mail sender, 4th is mail receiver; can use mail_admins in the final version
 			return HttpResponseRedirect('/polls/thankyou')													
 	else:
 			form = OpinionForm()
